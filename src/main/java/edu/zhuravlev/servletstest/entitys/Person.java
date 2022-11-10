@@ -5,30 +5,30 @@ import edu.zhuravlev.sql.micro_orm.annotations.Id;
 
 import java.util.Objects;
 
-@Entity
+@Entity("Users")
 public class Person {
     @Id
-    private int id;
+    private String login;
     private String name;
     private String email;
     private String country;
     private String password;
 
     public Person() {};
-    public Person(int id, String name, String email, String country, String password) {
-        this.id = id;
+    public Person(String login, String name, String email, String country, String password) {
+        this.login = login;
         this.name = name;
         this.email = email;
         this.country = country;
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public String getLogin() {
+        return login;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getName() {
@@ -68,17 +68,17 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return id == person.id && name.equals(person.name) && email.equals(person.email) && country.equals(person.country) && password.equals(person.password);
+        return login == person.login && name.equals(person.name) && email.equals(person.email) && country.equals(person.country) && password.equals(person.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, country, password);
+        return Objects.hash(login, name, email, country, password);
     }
 
     @Override
     public String toString() {
-        return "Person = {id=" + id + ", name=" + name +
+        return "Person = {login=" + login + ", name=" + name +
                 ", email=" + email + ", country=" + country +
                 ", password=" + password + "}";
     }

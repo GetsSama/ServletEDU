@@ -14,7 +14,7 @@
           <element id="module-output" name="ServletsTest" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: edu.zhuravlev.sql.example:postgresqlCRUD:0.0.1" />
+          <element id="library" level="project" name="Maven: edu.zhuravlev.sql.example:postgresqlCRUD:0.0.2" />
           <element id="library" level="project" name="Maven: org.postgresql:postgresql:42.5.0" />
           <element id="library" level="project" name="Maven: org.checkerframework:checker-qual:3.5.0" />
           <element id="library" level="project" name="Maven: com.google.guava:guava:31.1-jre" />
@@ -23,6 +23,7 @@
           <element id="library" level="project" name="Maven: com.google.code.findbugs:jsr305:3.0.2" />
           <element id="library" level="project" name="Maven: com.google.errorprone:error_prone_annotations:2.11.0" />
           <element id="library" level="project" name="Maven: com.google.j2objc:j2objc-annotations:1.3" />
+          <element id="library" level="project" name="Maven: org.wso2.orbit.org.apache.tomcat:jdbc-pool:9.0.65.wso2v1" />
         </element>
       </element>
       <element id="directory" name="META-INF">

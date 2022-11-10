@@ -2,12 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <meta charset="utf-8">
+    <title>Вход в ЛК</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form>
+    <p>
+        <label for="login">Логин: </label>
+        <input type="text" id="login" name="login" />
+    </p>
+    <p>
+        <label for="password">Пароль: </label>
+        <input type="password" id="password" name="password" />
+    </p>
+    <p>
+        <button type="submit" formmethod="get" formaction="http://localhost:8080/entry">Отправить</button>
+    </p>
+</form>
 </body>
 </html>
