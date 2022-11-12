@@ -1,8 +1,9 @@
 package edu.zhuravlev.servletstest;
 
+
+
 import edu.zhuravlev.servletstest.entitys.Person;
 import edu.zhuravlev.sql.micro_orm.EntityManager;
-import edu.zhuravlev.sql.micro_orm.db_connection.SimpleConnectionManagerImpl;
 
 import java.io.*;
 import javax.servlet.http.*;
@@ -17,7 +18,6 @@ public class HelloServlet extends HttpServlet {
         message = "Hello World!";
         EntityManager em = EntityManager.createEntityManager();
         person = em.read("1", Person.class);
-        SimpleConnectionManagerImpl.close();
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -32,5 +32,6 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void destroy() {
+
     }
 }

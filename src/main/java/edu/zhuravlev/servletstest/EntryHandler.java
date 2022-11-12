@@ -2,18 +2,12 @@ package edu.zhuravlev.servletstest;
 
 import edu.zhuravlev.servletstest.entitys.Person;
 import edu.zhuravlev.sql.micro_orm.EntityManager;
-import edu.zhuravlev.sql.micro_orm.db_connection.SimpleConnectionManagerImpl;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import javax.sql.ConnectionPoolDataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
@@ -24,55 +18,35 @@ public class EntryHandler extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        em = EntityManager.createEntityManager();
-//        PoolProperties p = new PoolProperties();
-//        p.setUrl("jdbc:postgresql://localhost/crud_edu");
-//        p.setDriverClassName("org.postgresql.Driver");
-//        p.setUsername("postgres");
-//        p.setPassword("520621df");
-//        p.setJmxEnabled(true);
-//        p.setTestWhileIdle(false);
-//        p.setTestOnBorrow(true);
-//        p.setValidationQuery("SELECT 1");
-//        p.setTestOnReturn(false);
-//        p.setValidationInterval(30000);
-//        p.setTimeBetweenEvictionRunsMillis(30000);
-//        p.setMaxActive(100);
-//        p.setInitialSize(10);
-//        p.setMaxWait(10000);
-//        p.setRemoveAbandonedTimeout(60);
-//        p.setMinEvictableIdleTimeMillis(30000);
-//        p.setMinIdle(10);
-//        p.setLogAbandoned(true);
-//        p.setRemoveAbandoned(true);
-//        p.setJdbcInterceptors(
-//                "org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
-//                        "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
-//        DataSource datasource = new DataSource();
-//        datasource.setPoolProperties(p);
-//        try (Connection conn = datasource.getConnection()) {
-//            System.out.println("Successful");
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-        try {
-            InitialContext cxt = new InitialContext();
-            if (cxt == null)
-                throw  new RuntimeException("No context!!!");
-            else
-                System.out.println("Context OK!");
+        //em = EntityManager.createEntityManager();
+        PoolProperties p = new PoolProperties();
+        p.setUrl("jdbc:postgresql://localhost/crud_edu");
+        p.setDriverClassName("org.postgresql.Driver");
+        p.setUsername("postgres");
+        p.setPassword("520621df");
+        p.setJmxEnabled(true);
+        p.setTestWhileIdle(false);
+        p.setTestOnBorrow(true);
+        p.setValidationQuery("SELECT 1");
+        p.setTestOnReturn(false);
+        p.setValidationInterval(30000);
+        p.setTimeBetweenEvictionRunsMillis(30000);
+        p.setMaxActive(100);
+        p.setInitialSize(10);
+        p.setMaxWait(10000);
+        p.setRemoveAbandonedTimeout(60);
+        p.setMinEvictableIdleTimeMillis(30000);
+        p.setMinIdle(10);
+        p.setLogAbandoned(true);
+        p.setRemoveAbandoned(true);
+        p.setJdbcInterceptors(
+                "org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
+                        "org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
+        DataSource datasource = new DataSource();
+        datasource.setPoolProperties(p);
 
-            DataSource ds = (DataSource) cxt.lookup( "java:/comp/env/jdbc/postgres" );
-
-            if ( ds == null ) {
-                throw new RuntimeException("Data source not found!");
-            }
-            else
-                System.out.println("Data source OK!");
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-
+        em = EntityManager.createEntityManager(datasource);
+        //em = EntityManager.createEntityManager();
     }
 
     @Override
@@ -103,6 +77,6 @@ public class EntryHandler extends HttpServlet {
 
     @Override
     public void destroy() {
-        SimpleConnectionManagerImpl.close();
+        em.freeResources();
     }
 }
